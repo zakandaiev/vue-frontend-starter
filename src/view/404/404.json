@@ -1,0 +1,20 @@
+{
+  "en": {
+    "seo": {
+      "title": "Page not found"
+    },
+    "title": "404",
+    "subtitle": "Page not found",
+    "text": "The page you are looking for might have been removed",
+    "button": "Return to Homepage"
+  },
+  "uk": {
+    "seo": {
+      "title": "Сторінку не знайдено"
+    },
+    "title": "404",
+    "subtitle": "Сторінку не знайдено",
+    "text": "Сторінка, яку ви шукаєте, могла бути видалена",
+    "button": "Повернутися на Головну"
+  }
+}

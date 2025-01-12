@@ -1,0 +1,36 @@
+@import "@/sass/util/reset-btn";
+
+.language-switcher {
+  display: inline-flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+
+  // .language-switcher__item
+  &__item {
+    @include reset-btn;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0.85em;
+    font-weight: var(--font-medium);
+    line-height: 4em;
+    color: var(--color-heading);
+    text-align: center;
+
+    transition: var(--transition);
+
+    &:hover, &:focus, &:active {
+      color: var(--color-primary-hover);
+    }
+
+     // .language-switcher__item.active
+    &.active {
+      color: var(--color-primary);
+    }
+  }
+}

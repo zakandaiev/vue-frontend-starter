@@ -1,0 +1,43 @@
+import{u as w,H as S,F as k}from"./CzPKGUb6.js";import{g as E,r as I,s as B}from"./BYpvdRkv.js";import{_ as $,f as q,c as F,b as d,a as s,t as l,u as c,d as n,w as H,g as y,F as L,r as V,o as N}from"./KzVOmgxJ.js";function b(u){const p=u;p.__i18n=p.__i18n||[],p.__i18n.push({locale:"",resource:{en:{seo:{title:{t:0,b:{t:2,i:[{t:3}],s:"Guide"}}}},uk:{seo:{title:{t:0,b:{t:2,i:[{t:3}],s:"Гайд"}}}}}})}const j={class:"page-content"},D={class:"container"},G={class:"row gap-xs"},R={class:"col-xs-12 col-md-8 order-xs-2 order-md-1"},T={class:"section section_offset border-top"},A={class:"section__body"},M={class:"section section_offset border-top"},O={class:"section__body"},W={class:"box"},z={"data-copy":"","data-toast":"Copied to clipboard",class:"cursor-pointer"},U={"data-copy":"","data-toast":"Copied to clipboard",class:"cursor-pointer"},g={__name:"Guide",setup(u){const p="vue-frontend-starter",_="Vue Frontend Starter is a boilerplate kit for easy building modern web applications with Vue.js",h="https://github.com/zakandaiev/vue-frontend-starter";w(),q(()=>{const r=document.querySelector(".section__navigation"),a=document.querySelectorAll(".section__title");if(!r||!a.length)return!1;a.forEach(t=>{const o=document.createElement("a"),i=`${E(t.textContent)}-${I()}`;t.id=i,o.href=`#${i}`,o.innerHTML=`<span>${t.textContent}</span>`,o.classList.add("section__navigation-item"),o.onclick=e=>{var f;const v=e.target.closest(".section__navigation-item");if(!v.hash)return!1;const m=document.querySelector(v.hash);m&&(e.preventDefault(),B(m,(((f=document.getElementById("header"))==null?void 0:f.offsetHeight)||0)+32))},r.appendChild(o)}),C(r),x()});function C(r){var o;const a=r.closest(".position-sticky");if(!a)return!1;const t=((o=document.getElementById("header"))==null?void 0:o.offsetHeight)||0;window.innerWidth>=768?a.style.top=`calc(2em + ${t}px)`:a.style.top=`${t}px`}function x(){const r=document.querySelectorAll(".section"),a=new IntersectionObserver(t=>{t.forEach(o=>{if(o.isIntersecting){const i=o.target.querySelector(".section__title");if(!i)return!1;document.querySelectorAll(".section__navigation-item").forEach(e=>{e.hash===`#${i.id}`?e.classList.add("active"):e.classList.remove("active")})}})},{root:document,rootMargin:"-10% 0px -90% 0px"});r.forEach(t=>{a.observe(t)})}return(r,a)=>{const t=V("router-link");return N(),F(L,null,[d(S),s("main",j,[s("div",D,[s("div",G,[s("div",R,[a[17]||(a[17]=s("div",{class:"section section_offset-bottom"},[s("h1",null,"Getting Started")],-1)),s("section",T,[a[4]||(a[4]=s("h2",{class:"section__title"}," Overview ",-1)),s("div",A,[s("p",null,l(c(_))+".",1),a[3]||(a[3]=s("p",null,[n(" Vue's requirements and documentation you'll find on "),s("a",{href:"https://vuejs.org/",target:"_blank"},"its official website"),n(". ")],-1)),s("p",null,[a[1]||(a[1]=n(" This starter is delivering with ready-to-use utils, styled components, helpers and much more. Its overview is available in ")),d(t,{to:r.$tr.i18nRoute({name:"components"})},{default:H(()=>a[0]||(a[0]=[s("span",null,"components",-1)])),_:1},8,["to"]),a[2]||(a[2]=n(" section. "))])])]),s("section",M,[a[16]||(a[16]=s("h2",{class:"section__title"}," How to use ",-1)),s("div",O,[a[14]||(a[14]=s("h4",{class:"font-regular"}," Instalation ",-1)),s("div",W,[s("pre",null,[a[7]||(a[7]=n("")),a[8]||(a[8]=s("span",{class:"color-muted"},"# Clone the repository",-1)),a[9]||(a[9]=n(`
+`)),s("span",z,[a[5]||(a[5]=s("span",{class:"color-primary"},"git clone",-1)),n(" "+l(c(h))+".git",1)]),a[10]||(a[10]=n(`
+
+`)),a[11]||(a[11]=s("span",{class:"color-muted"},"# Go to the folder",-1)),a[12]||(a[12]=n(`
+`)),s("span",U,[a[6]||(a[6]=s("span",{class:"color-primary"},"cd",-1)),n(" "+l(c(p)),1)]),a[13]||(a[13]=y(`
+
+<span class="color-muted" data-v-09047550># Install packages</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> i</span>
+<span class="color-muted" data-v-09047550># or</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> install</span>
+
+<span class="color-muted" data-v-09047550># Remove link to the original repository</span>
+<span class="color-muted" data-v-09047550># - if you use Windows system</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>Remove-Item</span> .git <span class="color-info" data-v-09047550>-Recurse -Force</span></span>
+<span class="color-muted" data-v-09047550># - or if you use Unix system</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>rm</span> <span class="color-info" data-v-09047550>-rf</span> .git</span>
+`,19))])]),a[15]||(a[15]=y(`<h4 class="font-regular" data-v-09047550> Develop </h4><div class="box" data-v-09047550><pre data-v-09047550><span class="color-muted" data-v-09047550># Start development mode with live-server</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run dev</span>
+<span class="color-muted" data-v-09047550># or with options</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run dev <span class="color-info" data-v-09047550>--port=3000</span></span>
+</pre></div><h4 class="font-regular" data-v-09047550> Build </h4><div class="box" data-v-09047550><pre data-v-09047550><span class="color-muted" data-v-09047550># Build static files for production</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run build</span>
+<span class="color-muted" data-v-09047550># or</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run prod</span>
+<span class="color-muted" data-v-09047550># or with options</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run build <span class="color-info" data-v-09047550>--base=/subdomain --outDir=/dest</span></span>
+
+<span class="color-muted" data-v-09047550># Start server for build preview</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run preview</span>
+<span class="color-muted" data-v-09047550># or with options</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run preview <span class="color-info" data-v-09047550>--port=3001</span></span>
+</pre></div><h4 class="font-regular" data-v-09047550> Lint </h4><div class="box" data-v-09047550><pre data-v-09047550><span class="color-muted" data-v-09047550># ESLint</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run lint:js</span>
+<span class="color-muted" data-v-09047550># or</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run lint:js<span class="color-info" data-v-09047550>:fix</span></span>
+
+<span class="color-muted" data-v-09047550># StyleLint</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run lint:css</span>
+<span class="color-muted" data-v-09047550># or</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run lint:css<span class="color-info" data-v-09047550>:fix</span></span>
+</pre></div><h4 class="font-regular" data-v-09047550> Backend emulation </h4><div class="box" data-v-09047550><pre data-v-09047550><span class="color-muted" data-v-09047550># Fastify listen backend.js</span>
+<span data-copy data-toast="Copied to clipboard" class="cursor-pointer" data-v-09047550><span class="color-primary" data-v-09047550>npm</span> run backend</span>
+</pre></div>`,8))])])]),a[18]||(a[18]=s("div",{class:"col-xs-12 col-md-3 offset-md-1 align-self-start position-sticky order-xs-1 order-md-2 bg-body"},[s("div",{class:"section__navigation"})],-1))])])]),d(k)],64)}}};typeof b=="function"&&b(g);const Q=$(g,[["__scopeId","data-v-09047550"]]);export{Q as default};

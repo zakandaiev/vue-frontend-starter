@@ -1,0 +1,70 @@
+{
+  "en": {
+    "features": [
+      {
+        "icon": "🚀",
+        "title": "Vite environment",
+        "text": "Modern & Fast development environment with it's all benefits"
+      },
+      {
+        "icon": "🏗️",
+        "title": "Vue.js ecosystem",
+        "text": "Flexible, fast and progressive JavaScript framework"
+      },
+      {
+        "icon": "📁",
+        "title": "Structured",
+        "text": "Well thought-out and convenient project structure"
+      },
+      {
+        "icon": "🛠️",
+        "title": "Rich features",
+        "text": "Ready-to-use utils, styled components, helpers etc."
+      },
+      {
+        "icon": "⚡",
+        "title": "Optimized content",
+        "text": "Convenient, modern and SEO friendly templates"
+      },
+      {
+        "icon": "🤖",
+        "title": "Аutomation features",
+        "text": "Fast HMR, SASS preprocessor, assets auto minifier etc."
+      }
+    ]
+  },
+  "uk": {
+    "features": [
+      {
+        "icon": "🚀",
+        "title": "Vite середовище",
+        "text": "Сучасне та швидке середовище розробки з усіма перевагами"
+      },
+      {
+        "icon": "🏗️",
+        "title": "Vue.js екосистема",
+        "text": "Гнучкий, швидкий та прогресивний JavaScript фреймворк"
+      },
+      {
+        "icon": "📁",
+        "title": "Структурований",
+        "text": "Добре продумана та зручна структура проєкту"
+      },
+      {
+        "icon": "🛠️",
+        "title": "Багаті можливості",
+        "text": "Готові утиліти, стилізовані компоненти, хелпери тощо."
+      },
+      {
+        "icon": "⚡",
+        "title": "Оптимізований контент",
+        "text": "Зручні, сучасні та SEO дружні шаблони"
+      },
+      {
+        "icon": "🤖",
+        "title": "Засоби автоматизації",
+        "text": "Швидкий HMR, SASS препроцесор, мініфікатор ассетів тощо."
+      }
+    ]
+  }
+}
