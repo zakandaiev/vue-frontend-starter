@@ -5,7 +5,9 @@ import Footer from '@/component/Footer/Footer.vue';
 import updateSEO from '@/composable/seo';
 import { getSlug } from '@/util/cyr-to-lat';
 import { randomString } from '@/util/random';
+import copyToClipboard from '@/util/clipboard';
 import smoothScroll from '@/util/smooth-scroll';
+import toast from '@/util/toast';
 
 /* eslint-disable no-undef */
 const appName = APP_NAME;
@@ -101,6 +103,11 @@ function sclollSpy() {
     observer.observe(section);
   });
 }
+
+function copyCmd(event) {
+  copyToClipboard(event.target.textContent);
+  toast('Copied to clipboard');
+}
 </script>
 
 <template>
@@ -153,43 +160,37 @@ function sclollSpy() {
                 <pre>
 <span class="color-muted"># Clone the repository</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">git clone</span> {{ appRepository }}.git</span>
 
 <span class="color-muted"># Go to the folder</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">cd</span> {{ appName }}</span>
 
 <span class="color-muted"># Install packages</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> i</span>
 <span class="color-muted"># or</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> install</span>
 
 <span class="color-muted"># Remove link to the original repository</span>
 <span class="color-muted"># - if you use Windows system</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">Remove-Item</span> .git <span class="color-info">-Recurse -Force</span></span>
 <span class="color-muted"># - or if you use Unix system</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">rm</span> <span class="color-info">-rf</span> .git</span>
 </pre>
               </div>
@@ -201,15 +202,13 @@ class="cursor-pointer"
                 <pre>
 <span class="color-muted"># Start development mode with live-server</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run dev</span>
 <span class="color-muted"># or with options</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run dev <span class="color-info">--port=3000</span></span>
 </pre>
               </div>
@@ -221,34 +220,29 @@ class="cursor-pointer"
                 <pre>
 <span class="color-muted"># Build static files for production</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run build</span>
 <span class="color-muted"># or</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run prod</span>
 <span class="color-muted"># or with options</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run build <span class="color-info">--base=/subdomain --outDir=/dest</span></span>
 
 <span class="color-muted"># Start server for build preview</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run preview</span>
 <span class="color-muted"># or with options</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run preview <span class="color-info">--port=3001</span></span>
 </pre>
               </div>
@@ -260,28 +254,24 @@ class="cursor-pointer"
                 <pre>
 <span class="color-muted"># ESLint</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run lint:js</span>
 <span class="color-muted"># or</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run lint:js<span class="color-info">:fix</span></span>
 
 <span class="color-muted"># StyleLint</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run lint:css</span>
 <span class="color-muted"># or</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run lint:css<span class="color-info">:fix</span></span>
 </pre>
               </div>
@@ -293,9 +283,8 @@ class="cursor-pointer"
                 <pre>
 <span class="color-muted"># Fastify listen backend.js</span>
 <span
-data-copy
-data-toast="Copied to clipboard"
 class="cursor-pointer"
+@click="copyCmd"
 ><span class="color-primary">npm</span> run backend</span>
 </pre>
               </div>

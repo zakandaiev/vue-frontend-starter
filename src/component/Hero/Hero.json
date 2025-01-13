@@ -1,7 +1,7 @@
 {
   "en": {
-    "subtitle": "Next Generation Frontend Tooling",
-    "text": "Vue Frontend Starter is a boilerplate kit for easy building modern web applications with Vue.js",
+    "subtitle": "Next Generation FrontEnd Tooling",
+    "text": "Vue FrontEnd Starter is a boilerplate kit for easy building modern web applications with Vue.js",
     "action": {
       "primary": "Get Started",
       "secondary": "View on GitHub"
@@ -9,7 +9,7 @@
   },
   "uk": {
     "subtitle": "Сучасний інструментарій нового покоління",
-    "text": "Vue Frontend Starter це еталонний шаблон для зручного процесу розробки сучасних web застосунків на Vue.js",
+    "text": "Vue FrontEnd Starter це еталонний шаблон для зручного процесу розробки сучасних web застосунків на Vue.js",
     "action": {
       "primary": "Розпочати",
       "secondary": "Дивитись на GitHub"

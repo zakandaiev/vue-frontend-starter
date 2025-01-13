@@ -4,7 +4,7 @@
   "private": false,
   "author": "Oleksandr Zakandaiev",
   "authorUrl": "https://github.com/zakandaiev",
-  "description": "Vue Frontend Starter is a boilerplate kit for easy building modern web applications with Vue.js",
+  "description": "Vue FrontEnd Starter is a boilerplate kit for easy building modern web applications with Vue.js",
   "keywords": [
     "vue",
     "vite",

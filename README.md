@@ -2,7 +2,7 @@
 
 # vue-frontend-starter
 
-Vue Frontend Starter is a boilerplate kit for easy building modern web applications with Vue.js
+Vue FrontEnd Starter is a boilerplate kit for easy building modern web applications with Vue.js
 
 ## Homepage
 [https://zakandaiev.github.io/vue-frontend-starter](https://zakandaiev.github.io/vue-frontend-starter)
