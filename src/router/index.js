@@ -12,17 +12,17 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          component: () => import('@/view/Home/Home.vue'),
+          component: () => import('@/view/home/Home.vue'),
         },
         {
           path: 'guide',
           name: 'guide',
-          component: () => import('@/view/Guide/Guide.vue'),
+          component: () => import('@/view/guide/Guide.vue'),
         },
         {
           path: 'components',
           name: 'components',
-          component: () => import('@/view/Components/Components.vue'),
+          component: () => import('@/view/components/Components.vue'),
         },
         {
           path: ':pathMatch(.*)*',

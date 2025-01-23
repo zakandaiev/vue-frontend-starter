@@ -1,9 +1,12 @@
 export default {
   uk: {
     currency: {
-      style: 'currency',
+      // style: 'decimal',
+      // minimumFractionDigits: 2,
+      // maximumFractionDigits: 2,
       currency: 'UAH',
-      currencyDisplay: 'symbol',
+      style: 'currency', // decimal, currency, percent, unit
+      currencyDisplay: 'symbol', // code, symbol, narrowSymbol, name
     },
   },
 };

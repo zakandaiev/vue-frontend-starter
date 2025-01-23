@@ -7,7 +7,11 @@ function updateSEO(options = {}) {
   const { t, te, locale } = useI18n();
 
   const route = useRoute();
-  const { title: routeMetaTitle, description: routeMetaDescription } = route.meta;
+  const {
+    title: routeMetaTitle,
+    description: routeMetaDescription,
+    keywords: routeMetaKeywords,
+  } = route.meta;
 
   onMounted(() => {
     update();
@@ -21,14 +25,22 @@ function updateSEO(options = {}) {
   );
 
   function update() {
-    // TITLE - PREFIX
+    updateTitle();
+    updateDescription();
+    updateKeywords();
+  }
+
+  function updateTitle() {
+    const appName = te('app.name') ? t('app.name') : APP_NAME_FORMATTED;
+
+    // DEFINE PREFIX
     let titlePrefix = typeof options.titlePrefix === 'string' ? options.titlePrefix : '';
 
-    // TITLE - SUFFIX
-    let titleSuffix = typeof options.titleSuffix === 'string' ? options.titleSuffix : ` - ${APP_NAME_FORMATTED}`;
+    // DEFINE SUFFIX
+    let titleSuffix = typeof options.titleSuffix === 'string' ? options.titleSuffix : ` — ${appName}`;
 
-    // TITLE - DEFINE
-    let title = APP_NAME_FORMATTED;
+    // DEFINE TITLE
+    let title = appName;
     if (options.title) {
       title = options.title;
     } else if (te(options.i18nTitleKey)) {
@@ -42,14 +54,16 @@ function updateSEO(options = {}) {
     if (titlePrefix === title) {
       titlePrefix = '';
     }
-    if (titleSuffix === ` - ${title}`) {
+    if (titleSuffix === ` — ${title}`) {
       titleSuffix = '';
     }
 
-    // TITLE - SET
+    // UPDATE
     document.title = titlePrefix + title + titleSuffix;
+  }
 
-    // DESCRIPTION - DEFINE
+  function updateDescription() {
+    // DEFINE
     let description = APP_DESCRIPTION;
     if (options.description) {
       description = options.description;
@@ -61,7 +75,7 @@ function updateSEO(options = {}) {
       description = routeMetaDescription;
     }
 
-    // DESCRIPTION - SET
+    // UPDATE
     let descriptionElement = document.querySelector('head meta[name="description"]');
     if (!descriptionElement) {
       descriptionElement = document.createElement('meta');
@@ -70,6 +84,34 @@ function updateSEO(options = {}) {
     }
 
     descriptionElement.setAttribute('content', description);
+  }
+
+  function updateKeywords() {
+    // DEFINE
+    let keywords = APP_KEYWORDS;
+    if (options.keywords) {
+      keywords = options.keywords;
+    } else if (te(options.i18nKeywordsKey)) {
+      keywords = t(options.i18nKeywordsKey);
+    } else if (te('seo.keywords')) {
+      keywords = t('seo.keywords');
+    } else if (routeMetaKeywords) {
+      keywords = routeMetaKeywords;
+    }
+
+    if (Array.isArray(keywords)) {
+      keywords = keywords.join(', ');
+    }
+
+    // UPDATE
+    let keywordsElement = document.querySelector('head meta[name="keywords"]');
+    if (!keywordsElement) {
+      keywordsElement = document.createElement('meta');
+      keywordsElement.setAttribute('name', 'keywords');
+      document.head.appendChild(keywordsElement);
+    }
+
+    keywordsElement.setAttribute('content', keywords);
   }
 }
 

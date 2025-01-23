@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import Config from '@/config';
-import LanguageSwitcher from '@/component/LanguageSwitcher/LanguageSwitcher.vue';
+import LanguageSwitcher from '@/component/language-switcher/LanguageSwitcher.vue';
 import { IconMoon, IconSun, IconBrandGithub } from '@tabler/icons-vue';
 
 /* eslint-disable no-undef */

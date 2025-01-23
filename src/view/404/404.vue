@@ -1,6 +1,6 @@
 <script setup>
-import Header from '@/component/Header/Header.vue';
-import Footer from '@/component/Footer/Footer.vue';
+import Header from '@/component/header/Header.vue';
+import Footer from '@/component/footer/Footer.vue';
 import updateSEO from '@/composable/seo';
 
 updateSEO();

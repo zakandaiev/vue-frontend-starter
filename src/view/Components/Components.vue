@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted } from 'vue';
-import Header from '@/component/Header/Header.vue';
-import Footer from '@/component/Footer/Footer.vue';
-import Loader from '@/component/Loader/Loader.vue';
+import Header from '@/component/header/Header.vue';
+import Footer from '@/component/footer/Footer.vue';
+import Loader from '@/component/loader/Loader.vue';
 import updateSEO from '@/composable/seo';
 import { getSlug } from '@/util/cyr-to-lat';
 import { randomString } from '@/util/random';
