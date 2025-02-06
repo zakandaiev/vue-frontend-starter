@@ -6,6 +6,7 @@ const pathDist = processArg.dist || './dist';
 const pathSrc = './src';
 
 const absPath = {
+  root: nodePath.resolve(cwd()),
   node: nodePath.resolve(cwd(), 'node_modules'),
   dist: nodePath.resolve(cwd(), pathDist),
   src: nodePath.resolve(cwd(), pathSrc),
@@ -14,6 +15,7 @@ const absPath = {
   font: nodePath.resolve(cwd(), `${pathSrc}/font`),
   i18n: nodePath.resolve(cwd(), `${pathSrc}/i18n`),
   img: nodePath.resolve(cwd(), `${pathSrc}/img`),
+  layout: nodePath.resolve(cwd(), `${pathSrc}/layout`),
   plugin: nodePath.resolve(cwd(), `${pathSrc}/plugin`),
   public: nodePath.resolve(cwd(), `${pathSrc}/../public`),
   router: nodePath.resolve(cwd(), `${pathSrc}/router`),

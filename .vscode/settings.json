@@ -8,14 +8,6 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "emmet.triggerExpansionOnTab": true,
-  "Workspace_Formatter.excludePattern": [
-    "**/build",
-    "**/coverage",
-    "**/docs",
-    "**/dist",
-    "**/node_modules",
-    "**/vendor",
-  ],
   // HTML
   "html.format.enable": true,
   "html.autoClosingTags": false,

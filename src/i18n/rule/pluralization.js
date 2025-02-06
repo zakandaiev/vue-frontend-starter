@@ -1,4 +1,4 @@
-function cyrylicPluralizationRules(choice, choicesLength) {
+function cyrylic(choice, choicesLength) {
   if (choice === 0) {
     return 0;
   }
@@ -18,5 +18,5 @@ function cyrylicPluralizationRules(choice, choicesLength) {
 }
 
 export default {
-  uk: cyrylicPluralizationRules,
+  uk: cyrylic,
 };

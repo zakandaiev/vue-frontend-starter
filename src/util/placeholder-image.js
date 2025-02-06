@@ -1,6 +1,6 @@
 import placeholderUrl from '@/img/no-image.jpg';
 
-function placeholderImage(event) {
+function placeholderImage(event, customUrl) {
   if (!event) {
     return false;
   }
@@ -11,7 +11,7 @@ function placeholderImage(event) {
     return false;
   }
 
-  image.src = placeholderUrl;
+  image.src = customUrl || placeholderUrl;
   image.isPlaceholdered = true;
 
   return true;

@@ -53,7 +53,7 @@ async function request(resource, options = {}, timeout = null, delay = null) {
     response = await fetchWithTimeout(resource, options, getApiTimeout(timeout));
 
     data.code = response.status;
-  } catch (error) {
+  } finally {
     // do nothing
   }
 

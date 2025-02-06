@@ -1,117 +1,47 @@
-import { ref, computed, watch } from 'vue';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { defineStore } from 'pinia';
+import { request } from '@/util/request';
+import debounce from '@/util/debounce';
 import Config from '@/config';
 
-const useSearchStore = defineStore('search', () => {
-  const keyword = ref('');
-  const history = ref({});
-  const page = ref(1);
+const useSearchStore = defineStore('searchStore', () => {
+  const { locale } = useI18n();
+  const currentLanguage = locale.value;
   const isLoading = ref(false);
-  const isTyping = ref(false);
+  const resultHistory = ref({});
+  const result = computed(() => resultHistory.value[currentLanguage] || []);
 
-  const currentPageData = computed(() => {
-    if (!keyword.value.length || !isKeywordExists()) {
-      return [];
-    }
-
-    return history.value[keyword.value][`page-${page.value}`] || [];
-  });
-
-  const currentKeywordPageCount = computed(() => {
-    if (!keyword.value.length || !isKeywordExists()) {
-      return 1;
-    }
-
-    return history.value[keyword.value].pagesCount || 1;
-  });
-
-  watch(
-    () => keyword.value,
-    () => {
-      page.value = 1;
-
-      searchByKeyword();
-    },
-  );
-
-  watch(
-    () => page.value,
-    () => {
-      if (!keyword.value.length || !isKeywordExists() || !history.value[keyword.value][`page-${page.value}`]?.length) {
-        searchByKeyword();
-      }
-    },
-  );
-
-  let debounceTimeout = null;
-
-  async function searchByKeyword(options = {}) {
-    clearTimeout(debounceTimeout);
-
-    isLoading.value = false;
-    isTyping.value = false;
-
-    if (!keyword.value.length) {
+  function goSearch(searchText) {
+    if (typeof searchText !== 'string' || searchText.length < 2) {
       return false;
     }
 
-    isTyping.value = true;
+    return debounce(async () => {
+      const url = `${Config.api.backend}/search`;
 
-    debounceTimeout = setTimeout(async () => {
-      if (keyword.value.length && isKeywordExists() && history.value[keyword.value][`page-${page.value}`]?.length) {
-        isTyping.value = false;
-
-        return true;
-      }
-
-      isLoading.value = true;
-
-      try {
-        const res = await fetch(`${Config.api.backend}/search?text=${keyword.value}&size=${Config.search.pagination_limit || 10}&from=${page.value}&quality=1`, options);
-        const data = await res.json();
-
-        if (!data.objects.length) {
-          return false;
-        }
-
-        assignHistory(data);
-      } catch (error) {
-        // do nothing
-      } finally {
-        isLoading.value = false;
-        isTyping.value = false;
-      }
-    }, (Config.search.debounceMs || 1000));
-  }
-
-  function assignHistory(data) {
-    if (!data || !data.total) {
-      return false;
-    }
-
-    if (!isKeywordExists() || data.total !== history.value[keyword.value].total) {
-      history.value[keyword.value] = {
-        total: data.total,
-        pagesCount: Math.ceil(data.total / Config.search.pagination_limit),
+      const options = {
+        method: 'POST',
+        body: {
+          keyword: searchText.trim(),
+          language: currentLanguage,
+        },
       };
-    }
 
-    history.value[keyword.value][`page-${page.value}`] = data.objects;
-  }
+      const data = await request(url, options);
 
-  function isKeywordExists() {
-    return keyword.value in history.value;
+      if (data.status !== 'success') {
+        return false;
+      }
+
+      return data.data || [];
+    }, Config.api.delayMs);
   }
 
   return {
-    keyword,
-    history,
-    page,
     isLoading,
-    isTyping,
-    currentPageData,
-    currentKeywordPageCount,
-    searchByKeyword,
+    result,
+    goSearch,
   };
 });
 
