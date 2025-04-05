@@ -1,27 +1,17 @@
 <script setup>
-import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 import Translation from '@/i18n/translation';
 
 const { t, locale } = useI18n();
-const router = useRouter();
-const { supportedLocales } = Translation;
 
-watch(
-  () => locale.value,
-  async (l) => {
-    await Translation.switchLanguage(l);
-    await router.replace({ params: { locale: l } });
-  },
-);
+const { supportedLocales } = Translation;
 </script>
 
 <template>
   <div class="language-switcher">
     <button
       v-for="sLocale in supportedLocales"
-      :key="`locale-${sLocale}`"
+      :key="sLocale"
       type="button"
       class="language-switcher__item"
       :class="{ active: locale === sLocale }"

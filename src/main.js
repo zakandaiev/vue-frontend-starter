@@ -20,7 +20,15 @@ app.use(router);
 app.use(i18n);
 app.use(i18nLocalScope);
 app.use(Translation);
-app.use(Logger, { enabled: import.meta.env.PROD });
-// app.use(Telegram, { router });
+
+app.use(Logger, {
+  enabled: import.meta.env.PROD,
+});
+
+// app.use(Telegram, {
+//   disableSwipes: true,
+//   expand: true,
+//   router,
+// });
 
 app.mount('#app');

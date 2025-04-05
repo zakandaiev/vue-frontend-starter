@@ -9,8 +9,10 @@ const Telegram = {
 
     app.config.globalProperties.$telegram = Telegram;
 
+    const optDisableSwipes = options.disableSwipes === false ? false : true;
     const optExpand = options.expand === false ? false : true;
     const optRouter = options.router ? options.router : false;
+    const optOnReady = typeof options.onReady === 'function' ? options.onReady : false;
 
     const script = document.createElement('script');
     script.async = true;
@@ -24,12 +26,20 @@ const Telegram = {
 
       Object.assign(Telegram, webApp);
 
+      if (optDisableSwipes) {
+        Telegram.disableVerticalSwipes();
+      }
+
       if (optExpand) {
         Telegram.expand();
       }
 
       if (optRouter) {
         Telegram.setRouterHistoryToBackButton(optRouter);
+      }
+
+      if (optOnReady) {
+        optOnReady(webApp);
       }
 
       Telegram.isReady = true;

@@ -31,7 +31,7 @@ const Logger = {
   },
 
   logError: async (error) => {
-    if (!Logger.isEnabled) {
+    if (!Logger.isEnabled || error?.message === 'Script error.') {
       return false;
     }
 
