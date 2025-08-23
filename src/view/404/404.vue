@@ -1,9 +1,12 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
 import Header from '@/component/header/Header.vue';
 import Footer from '@/component/footer/Footer.vue';
 import updateSEO from '@/composable/seo';
 
-updateSEO();
+const { t, te } = useI18n();
+
+updateSEO({ t, te });
 </script>
 
 <template>
@@ -14,15 +17,15 @@ updateSEO();
       <div class="hero section_offset">
         <div class="hero__main">
           <h1 class="hero__title">
-            {{ $t('title') }}
+            {{ t('title') }}
           </h1>
 
           <h2 class="hero__subtitle">
-            {{ $t('subtitle') }}
+            {{ t('subtitle') }}
           </h2>
 
           <h3 class="hero__text">
-            {{ $t('text') }}
+            {{ t('text') }}
           </h3>
 
           <div class="hero__actions">
@@ -30,7 +33,7 @@ updateSEO();
               :to="$tr.i18nRoute({ name: 'home' })"
               class="btn btn_primary"
             >
-              {{ $t('button') }}
+              {{ t('button') }}
             </router-link>
           </div>
         </div>

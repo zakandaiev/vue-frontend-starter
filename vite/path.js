@@ -10,6 +10,7 @@ const absPath = {
   node: nodePath.resolve(cwd(), 'node_modules'),
   dist: nodePath.resolve(cwd(), pathDist),
   src: nodePath.resolve(cwd(), pathSrc),
+  api: nodePath.resolve(cwd(), `${pathSrc}/api`),
   component: nodePath.resolve(cwd(), `${pathSrc}/component`),
   composable: nodePath.resolve(cwd(), `${pathSrc}/composable`),
   font: nodePath.resolve(cwd(), `${pathSrc}/font`),

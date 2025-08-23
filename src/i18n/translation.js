@@ -1,6 +1,5 @@
 import { nextTick } from 'vue';
 import i18n from '@/i18n';
-import Config from '@/config';
 import { setStorage, getStorage } from '@/util/storage';
 
 const Translation = {
@@ -11,36 +10,24 @@ const Translation = {
     app.config.globalProperties.$tr = Translation;
   },
 
-  get defaultLocale() {
-    return Config.i18n.default;
-  },
-
-  get supportedLocales() {
-    return Config.i18n.supported;
+  get i18n() {
+    return i18n.global;
   },
 
   get currentLocale() {
-    return i18n.global.locale.value;
+    return Translation.i18n.locale.value;
   },
 
   set currentLocale(newLocale) {
-    i18n.global.locale.value = newLocale;
+    Translation.i18n.locale.value = newLocale;
   },
 
-  async switchLanguage(newLocale) {
-    await Translation.loadLocaleMessages(newLocale);
-    Translation.currentLocale = newLocale;
-    document.querySelector('html').setAttribute('lang', newLocale);
-    setStorage(Translation.storageKey, newLocale, Translation.storageType);
+  get defaultLocale() {
+    return Translation.i18n.fallbackLocale;
   },
 
-  async loadLocaleMessages(locale) {
-    if (!i18n.global.availableLocales.includes(locale)) {
-      const messages = await import(`@/i18n/locale/${locale}.json`);
-      i18n.global.setLocaleMessage(locale, messages.default);
-    }
-
-    return nextTick();
+  get supportedLocales() {
+    return Translation.i18n.availableLocales;
   },
 
   isLocaleSupported(locale) {
@@ -48,43 +35,39 @@ const Translation = {
   },
 
   getUserLocale() {
-    const locale = window.navigator.language
-      || window.navigator.userLanguage
-      || Translation.defaultLocale;
-
-    return {
-      locale,
-      localeNoRegion: locale.split('-')[0],
-    };
-  },
-
-  getPersistedLocale() {
-    const persistedLocale = getStorage(Translation.storageKey, Translation.storageType);
-
-    if (Translation.isLocaleSupported(persistedLocale)) {
-      return persistedLocale;
-    }
-    return null;
-  },
-
-  guessDefaultLocale() {
-    // SAVED LANGUAGE
-    const userPersistedLocale = Translation.getPersistedLocale();
-    if (userPersistedLocale) {
-      return userPersistedLocale;
+    const storedLanguage = getStorage(Translation.storageKey, Translation.storageType);
+    if (Translation.isLocaleSupported(storedLanguage)) {
+      return storedLanguage;
     }
 
-    // SYSTEM LANGUAGE
-    // const userPreferredLocale = Translation.getUserLocale()
-    // if (Translation.isLocaleSupported(userPreferredLocale.locale)) {
-    //   return userPreferredLocale.locale
-    // }
-    // if (Translation.isLocaleSupported(userPreferredLocale.localeNoRegion)) {
-    //   return userPreferredLocale.localeNoRegion
-    // }
+    const systemLanguage = window?.navigator?.language?.split('-')[0]?.toLowerCase();
+    if (Translation.isLocaleSupported(systemLanguage)) {
+      return systemLanguage;
+    }
 
-    // APP DEFAULT LANGUAGE
     return Translation.defaultLocale;
+  },
+
+  async loadLocaleMessages(locale) {
+    if (!Translation.supportedLocales.includes(locale)) {
+      const messages = await import(`@/i18n/locale/${locale}.json`);
+      Translation.i18n.setLocaleMessage(locale, messages.default);
+    }
+    return nextTick();
+  },
+
+  async switchLocale(newLocale) {
+    if (!Translation.isLocaleSupported(newLocale)) {
+      return false;
+    }
+
+    await Translation.loadLocaleMessages(newLocale);
+
+    Translation.currentLocale = newLocale;
+    document.documentElement.setAttribute('lang', newLocale);
+    setStorage(Translation.storageKey, newLocale, Translation.storageType);
+
+    return true;
   },
 
   i18nRoute(to) {
@@ -102,14 +85,14 @@ const Translation = {
 
     if (!Translation.isLocaleSupported(paramLocale)) {
       if (to.name === 'home' && to.path !== '/') {
-        return next(Translation.guessDefaultLocale() + to.path);
+        return next(Translation.getUserLocale() + to.path);
       }
 
       return next(Translation.i18nRoute({
         name: to.name,
         params: {
           ...to.params,
-          locale: Translation.guessDefaultLocale(),
+          locale: Translation.getUserLocale(),
         },
         query: {
           ...to.query,
@@ -117,7 +100,7 @@ const Translation = {
       }));
     }
 
-    await Translation.switchLanguage(paramLocale);
+    await Translation.switchLocale(paramLocale);
 
     return next();
   },

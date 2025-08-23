@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Header from '@/component/header/Header.vue';
 import Footer from '@/component/footer/Footer.vue';
 import Loader from '@/component/loader/Loader.vue';
@@ -10,7 +11,9 @@ import copyToClipboard from '@/util/clipboard';
 import smoothScroll from '@/util/smooth-scroll';
 import toast from '@/util/toast';
 
-updateSEO();
+const { t, te } = useI18n();
+
+updateSEO({ t, te });
 
 onMounted(() => {
   const navigation = document.querySelector('.section__navigation');
@@ -60,7 +63,7 @@ function setSticky(navigation) {
   const headerHeight = document.getElementById('header')?.offsetHeight || 0;
 
   if (window.innerWidth >= 768) {
-    parentNode.style.top = `calc(2em + ${headerHeight}px)`;
+    parentNode.style.top = `calc(3.2rem + ${headerHeight}px)`;
   } else {
     parentNode.style.top = `${headerHeight}px`;
   }
@@ -230,17 +233,17 @@ function sclollSpy() {
 
               <div class="row fill">
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     Grow column
                   </div>
                 </div>
                 <div class="col col-auto">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     Auto column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     Grow column
                   </div>
                 </div>
@@ -256,42 +259,42 @@ function sclollSpy() {
 
               <div class="row cols-xs-2 cols-md-4">
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     1 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     2 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     3 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     4 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     5 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     6 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     7 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     8 column
                   </div>
                 </div>
@@ -307,22 +310,22 @@ function sclollSpy() {
 
               <div class="row">
                 <div class="col-xs-12 col-md-3">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     1 column
                   </div>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     2 column
                   </div>
                 </div>
                 <div class="col-xs-12 col-md-3">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     3 column
                   </div>
                 </div>
                 <div class="col-xs-12">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     4 column
                   </div>
                 </div>
@@ -336,22 +339,22 @@ function sclollSpy() {
 
               <div class="row">
                 <div class="col-xs-12 col-md-3">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     1 column
                   </div>
                 </div>
                 <div class="col-xs-12 col-md-3 offset-md-3">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     2 column
                   </div>
                 </div>
                 <div class="col-xs-12 col-md-3 offset-md-3">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     3 column
                   </div>
                 </div>
                 <div class="col-xs-12 col-md-3 offset-md-3">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     4 column
                   </div>
                 </div>
@@ -371,32 +374,32 @@ function sclollSpy() {
 
               <div class="row fill gap-xs cols-xs-2 cols-md-4">
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     1 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     2 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     3 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     4 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     5 column
                   </div>
                 </div>
                 <div class="col">
-                  <div class="border radius p-2 text-center">
+                  <div class="border radius-md p-2 text-center">
                     6 column
                   </div>
                 </div>

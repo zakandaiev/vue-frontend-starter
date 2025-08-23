@@ -1,7 +1,11 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
 /* eslint-disable no-undef */
 const appNameFormatted = APP_NAME_FORMATTED;
 const appRepository = APP_REPOSITORY;
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -12,11 +16,11 @@ const appRepository = APP_REPOSITORY;
       </h1>
 
       <h2 class="hero__subtitle">
-        {{ $t('subtitle') }}
+        {{ t('subtitle') }}
       </h2>
 
       <h3 class="hero__text">
-        {{ $t('text') }}
+        {{ t('text') }}
       </h3>
 
       <div class="hero__actions">
@@ -24,7 +28,7 @@ const appRepository = APP_REPOSITORY;
           :to="$tr.i18nRoute({ name: 'guide' })"
           class="btn btn_primary"
         >
-          {{ $t('action.primary') }}
+          {{ t('action.primary') }}
         </router-link>
 
         <a
@@ -32,7 +36,7 @@ const appRepository = APP_REPOSITORY;
           target="_blank"
           class="btn"
         >
-          {{ $t('action.secondary') }}
+          {{ t('action.secondary') }}
         </a>
       </div>
     </div>

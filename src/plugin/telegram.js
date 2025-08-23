@@ -9,40 +9,27 @@ const Telegram = {
 
     app.config.globalProperties.$telegram = Telegram;
 
-    const optDisableSwipes = options.disableSwipes === false ? false : true;
-    const optExpand = options.expand === false ? false : true;
-    const optRouter = options.router ? options.router : false;
-    const optOnReady = typeof options.onReady === 'function' ? options.onReady : false;
-
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://telegram.org/js/telegram-web-app.js';
     script.onload = () => {
       const webApp = window?.Telegram?.WebApp;
-
       if (!webApp.platform || !webApp.platform.length || webApp.platform === 'unknown') {
         return false;
       }
 
       Object.assign(Telegram, webApp);
+      Telegram.isReady = true;
 
-      if (optDisableSwipes) {
-        Telegram.disableVerticalSwipes();
-      }
-
-      if (optExpand) {
-        Telegram.expand();
-      }
-
+      const optRouter = options.router ? options.router : false;
       if (optRouter) {
         Telegram.setRouterHistoryToBackButton(optRouter);
       }
 
+      const optOnReady = typeof options.onReady === 'function' ? options.onReady : false;
       if (optOnReady) {
         optOnReady(webApp);
       }
-
-      Telegram.isReady = true;
     };
 
     document.head.appendChild(script);

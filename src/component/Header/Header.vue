@@ -1,12 +1,15 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Config from '@/config';
 import LanguageSwitcher from '@/component/language-switcher/LanguageSwitcher.vue';
-import { IconMoon, IconSun, IconBrandGithub } from '@tabler/icons-vue';
+import { IconMoon, IconSun, IconBrandGit } from '@tabler/icons-vue';
 
 /* eslint-disable no-undef */
 const appNameFormatted = APP_NAME_FORMATTED;
 const appRepository = APP_REPOSITORY;
+
+const { t, tm, rt } = useI18n();
 
 const header = ref(null);
 
@@ -46,7 +49,7 @@ function setHeader() {
           <img
             class="header__logo-image"
             src="@/img/vue-logo.svg"
-            :alt="$t('logo')"
+            :alt="t('logo')"
             height="24"
           >
           <span class="header__logo-text">{{ appNameFormatted }}</span>
@@ -55,13 +58,13 @@ function setHeader() {
 
         <nav class="header__nav">
           <router-link
-            v-for="nav in $tm('nav')"
-            :key="$rt(nav.route)"
-            :to="$tr.i18nRoute({ name: $rt(nav.route) })"
+            v-for="nav in tm('nav')"
+            :key="rt(nav.route)"
+            :to="$tr.i18nRoute({ name: rt(nav.route) })"
             class="header__nav-item"
-            :class="{ active: $route.name === $rt(nav.route) }"
+            :class="{ active: $route.name === rt(nav.route) }"
           >
-            {{ $rt(nav.name) }}
+            {{ rt(nav.name) }}
           </router-link>
         </nav>
 
@@ -71,14 +74,14 @@ function setHeader() {
           <span
             data-theme-set="dark"
             class="header__appearance-item"
-            :title="$t('switch_to_dark_theme')"
+            :title="t('switch_to_dark_theme')"
           >
             <IconSun />
           </span>
           <span
             data-theme-set="light"
             class="header__appearance-item"
-            :title="$t('switch_to_light_theme')"
+            :title="t('switch_to_light_theme')"
           >
             <IconMoon />
           </span>
@@ -89,9 +92,9 @@ function setHeader() {
             :href="appRepository"
             target="_blank"
             class="header__social-item"
-            :title="$t('view_on_git')"
+            :title="t('view_on_git')"
           >
-            <IconBrandGithub />
+            <IconBrandGit />
           </a>
         </div>
       </div>

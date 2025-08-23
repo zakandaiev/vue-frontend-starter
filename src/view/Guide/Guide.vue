@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Header from '@/component/header/Header.vue';
 import Footer from '@/component/footer/Footer.vue';
 import updateSEO from '@/composable/seo';
@@ -14,7 +15,9 @@ const appName = APP_NAME;
 const appDescription = APP_DESCRIPTION;
 const appRepository = APP_REPOSITORY;
 
-updateSEO();
+const { t, te } = useI18n();
+
+updateSEO({ t, te });
 
 onMounted(() => {
   const navigation = document.querySelector('.section__navigation');
@@ -64,7 +67,7 @@ function setSticky(navigation) {
   const headerHeight = document.getElementById('header')?.offsetHeight || 0;
 
   if (window.innerWidth >= 768) {
-    parentNode.style.top = `calc(2em + ${headerHeight}px)`;
+    parentNode.style.top = `calc(3.2rem + ${headerHeight}px)`;
   } else {
     parentNode.style.top = `${headerHeight}px`;
   }

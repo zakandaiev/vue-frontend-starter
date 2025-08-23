@@ -1,47 +1,70 @@
 import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { defineStore } from 'pinia';
-import { request } from '@/util/request';
+import { getSearchResultByText } from '@/api';
+import Translation from '@/i18n/translation';
 import debounce from '@/util/debounce';
 import Config from '@/config';
 
-const useSearchStore = defineStore('searchStore', () => {
-  const { locale } = useI18n();
-  const currentLanguage = locale.value;
-  const isLoading = ref(false);
-  const resultHistory = ref({});
-  const result = computed(() => resultHistory.value[currentLanguage] || []);
+// USE CASE
+// import { useSearchStore } from '@/store';
+// ...
+// <input v-model="searchStore.searchText" @input="searchStore.handleSearch" />
 
-  function goSearch(searchText) {
-    if (typeof searchText !== 'string' || searchText.length < 2) {
+const useSearchStore = defineStore('searchStore', () => {
+  const SEARCH_TEXT_MIN_LENGTH = 2;
+
+  const searchText = ref('');
+  const isLoading = ref(false);
+  const isSearching = computed(() => searchText.value.length > SEARCH_TEXT_MIN_LENGTH);
+
+  const resultHistory = ref({});
+  const resultKey = computed(() => `${Translation.currentLocale}_${searchText.value}`);
+  const result = computed(() => resultHistory.value[resultKey.value] || {});
+
+  function reset(fullReset = false) {
+    searchText.value = '';
+    isLoading.value = false;
+
+    if (fullReset) {
+      resultHistory.value = {};
+    }
+  }
+
+  function handleSearch() {
+    if (!isSearching.value || resultHistory.value[resultKey.value]) {
+      isLoading.value = false;
       return false;
     }
 
+    isLoading.value = true;
+
     return debounce(async () => {
-      const url = `${Config.api.backend}/search`;
-
-      const options = {
-        method: 'POST',
-        body: {
-          keyword: searchText.trim(),
-          language: currentLanguage,
-        },
-      };
-
-      const data = await request(url, options);
-
-      if (data.status !== 'success') {
+      if (!isSearching.value || resultHistory.value[resultKey.value]) {
+        isLoading.value = false;
         return false;
       }
 
-      return data.data || [];
-    }, Config.api.delayMs);
+      const data = await getSearchResultByText(searchText.value, SEARCH_TEXT_MIN_LENGTH);
+      if (data.status !== 'success') {
+        isLoading.value = false;
+        return false;
+      }
+
+      resultHistory.value[resultKey.value] = data.data || [];
+
+      isLoading.value = false;
+
+      return result.value;
+    }, Config.search.debounceMs);
   }
 
   return {
+    searchText,
     isLoading,
+    isSearching,
     result,
-    goSearch,
+    reset,
+    handleSearch,
   };
 });
 

@@ -1,6 +1,6 @@
-import vue from 'eslint-plugin-vue';
 import globals from 'globals';
 import js from '@eslint/js';
+import vue from 'eslint-plugin-vue';
 import { FlatCompat } from '@eslint/eslintrc';
 import { absPath } from './vite/path.js';
 

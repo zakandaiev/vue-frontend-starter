@@ -1,13 +1,11 @@
 /* eslint-disable no-undef */
 import { onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import onLanguageChange from '@/composable/on-language-change';
 
 const useStore = {};
 
 function updateSEO(options = {}) {
-  const { t, te } = useI18n();
   const route = useRoute();
 
   onMounted(() => {
@@ -19,8 +17,8 @@ function updateSEO(options = {}) {
   });
 
   function update() {
-    useStore.t = t;
-    useStore.te = te;
+    useStore.t = options.t;
+    useStore.te = options.te;
     useStore.route = route;
 
     updateSEOTitle(options);

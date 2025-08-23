@@ -1,7 +1,11 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
+
 /* eslint-disable no-undef */
 const appAuthor = APP_AUTHOR;
 const appAuthorUrl = APP_AUTHOR_URL;
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -10,7 +14,7 @@ const appAuthorUrl = APP_AUTHOR_URL;
     class="footer section_offset"
   >
     <div class="container">
-      {{ $t('made_by') }}
+      {{ t('made_by') }}
 
       <a
         :href="appAuthorUrl"

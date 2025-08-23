@@ -5,12 +5,9 @@ import App from '@/App.vue';
 import router from '@/router';
 import i18n from '@/i18n';
 import Translation from '@/i18n/translation';
-import i18nLocalScope from '@/plugin/i18n-local-scope';
+import KeyboardFocusFix from '@/plugin/keyboard-focus-fix';
 import Logger from '@/plugin/logger';
 // import Telegram from '@/plugin/telegram';
-
-// eslint-disable-next-line
-console.log('%cMade by Zakandaiev', 'background:#41b883;color:#fff;padding:10px;font-weight:bold;');
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -18,17 +15,25 @@ const pinia = createPinia();
 app.use(pinia);
 app.use(router);
 app.use(i18n);
-app.use(i18nLocalScope);
 app.use(Translation);
+app.use(KeyboardFocusFix);
 
 app.use(Logger, {
   enabled: import.meta.env.PROD,
 });
 
 // app.use(Telegram, {
-//   disableSwipes: true,
-//   expand: true,
 //   router,
+//   onReady: (webApp) => {
+//     webApp.disableVerticalSwipes();
+//     webApp.enableClosingConfirmation();
+//     webApp.expand();
+//     webApp.lockOrientation();
+//     // webApp.requestFullscreen();
+//   },
 // });
 
 app.mount('#app');
+
+// eslint-disable-next-line
+console.log('%cMade by Zakandaiev', 'background:#41b883;color:#fff;padding:10px;font-weight:bold;');
