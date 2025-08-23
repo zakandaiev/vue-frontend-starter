@@ -6,7 +6,7 @@ async function dummy(opt = {}) {
     return false;
   }
 
-  const url = `${Config.api.backend}/getSearchResultByText`;
+  const url = `${Config.api.backend}/dummy`;
   const options = {
     method: 'POST',
     body: {
