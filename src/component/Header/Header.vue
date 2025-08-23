@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Config from '@/config';
 import LanguageSwitcher from '@/component/language-switcher/LanguageSwitcher.vue';
-import { IconMoon, IconSun, IconBrandGit } from '@tabler/icons-vue';
+import { IconMoon, IconSun, IconBrandGithub } from '@tabler/icons-vue';
 
 /* eslint-disable no-undef */
 const appNameFormatted = APP_NAME_FORMATTED;
@@ -94,7 +94,7 @@ function setHeader() {
             class="header__social-item"
             :title="t('view_on_git')"
           >
-            <IconBrandGit />
+            <IconBrandGithub />
           </a>
         </div>
       </div>

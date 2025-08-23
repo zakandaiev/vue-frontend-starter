@@ -23,7 +23,7 @@ const Translation = {
   },
 
   get defaultLocale() {
-    return Translation.i18n.fallbackLocale;
+    return Translation.i18n.fallbackLocale.value;
   },
 
   get supportedLocales() {
