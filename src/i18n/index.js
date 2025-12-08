@@ -1,9 +1,9 @@
-import { createI18n } from 'vue-i18n';
-import pluralRules from './rule/pluralization';
-import numberFormats from './rule/numbers';
-import datetimeFormats from './rule/datetime';
-import messages from '@intlify/unplugin-vue-i18n/messages';
 import Config from '@/config';
+import messages from '@intlify/unplugin-vue-i18n/messages';
+import { createI18n } from 'vue-i18n';
+import datetimeFormats from './rule/datetime';
+import numberFormats from './rule/numbers';
+import pluralRules from './rule/pluralization';
 
 const defaultLocale = Config.i18n.default;
 

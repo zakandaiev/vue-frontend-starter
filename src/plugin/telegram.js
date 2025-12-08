@@ -1,4 +1,5 @@
 const Telegram = {
+  startParam: {},
   isInstalled: false,
   isReady: false,
 
@@ -14,11 +15,19 @@ const Telegram = {
     script.src = 'https://telegram.org/js/telegram-web-app.js';
     script.onload = () => {
       const webApp = window?.Telegram?.WebApp;
-      if (!webApp.platform || !webApp.platform.length || webApp.platform === 'unknown') {
+      const isPlatformSupported = typeof webApp.platform === 'string' && webApp.platform.length && webApp.platform !== 'unknown';
+
+      const optOnLoad = typeof options.onLoad === 'function' ? options.onLoad : false;
+      if (optOnLoad) {
+        optOnLoad(isPlatformSupported, webApp);
+      }
+
+      if (!isPlatformSupported) {
         return false;
       }
 
       Object.assign(Telegram, webApp);
+      Telegram.startParam = Telegram.parseStartParam(webApp.initDataUnsafe?.start_param);
       Telegram.isReady = true;
 
       const optRouter = options.router ? options.router : false;
@@ -32,11 +41,50 @@ const Telegram = {
       }
     };
 
+    // https://github.com/Telegram-Mini-Apps/tma.js/issues/664#issuecomment-2667879251
+    window.TelegramGameProxy = { receiveEvent() {} };
+
     document.head.appendChild(script);
 
     Telegram.isInstalled = true;
 
     return true;
+  },
+
+  /**
+   * Parse start_param from Telegram init data object
+   * returns object
+   * "__" is equal to "&"
+   * "--" is equal to "="
+   * example in:
+   * "x--123__y--321__z"
+   * example out:
+   * { "x": "123", "y": "321", "z": true }
+   */
+  parseStartParam: (startParamString) => {
+    const result = {};
+
+    if (typeof startParamString !== 'string' || !startParamString.length) {
+      return result;
+    }
+
+    const pairs = startParamString.split('__').filter(Boolean);
+    pairs.forEach((pair) => {
+      const [key, ...rest] = pair.split('--').filter(Boolean);
+      const value = rest.join('--');
+
+      if (!key) {
+        return false;
+      }
+
+      if (typeof value === 'string' && value.length) {
+        result[key] = value;
+      } else {
+        result[key] = true;
+      }
+    });
+
+    return result;
   },
 
   setRouterHistoryToBackButton: (router) => {

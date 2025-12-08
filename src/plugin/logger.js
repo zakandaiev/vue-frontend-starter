@@ -1,6 +1,6 @@
 import Config from '@/config';
 import { request } from '@/util/request';
-import { urlFull } from '@/util/route';
+import route from '@/util/route';
 
 const Logger = {
   isInstalled: false,
@@ -30,8 +30,12 @@ const Logger = {
     return true;
   },
 
-  logError: async (error) => {
-    if (!Logger.isEnabled || !error?.stack?.includes(window.location.hostname)) {
+  logError: async (error, customBody = {}) => {
+    if (!Logger.isEnabled) {
+      return false;
+    }
+
+    if (error && !error?.stack?.includes(window.location.hostname)) {
       return false;
     }
 
@@ -42,9 +46,11 @@ const Logger = {
         app: Config.app,
         client: Logger.getClientInfo(),
         error,
-        url: urlFull,
+        url: route.urlFull,
+        ...customBody,
       },
     };
+
     const data = await request(url, options);
 
     return data;

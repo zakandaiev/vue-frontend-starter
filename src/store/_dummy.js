@@ -1,5 +1,5 @@
-import { ref } from 'vue';
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 const useDummyStore = defineStore('dummyStore', () => {
   const dummyVariable = ref(null);

@@ -1,15 +1,15 @@
 <script setup>
-import { onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import Header from '@/component/header/Header.vue';
 import Footer from '@/component/footer/Footer.vue';
+import Header from '@/component/header/Header.vue';
 import Loader from '@/component/loader/Loader.vue';
 import updateSEO from '@/composable/seo';
+import copyToClipboard from '@/util/clipboard';
 import { getSlug } from '@/util/cyr-to-lat';
 import { randomString } from '@/util/random';
-import copyToClipboard from '@/util/clipboard';
 import smoothScroll from '@/util/smooth-scroll';
 import toast from '@/util/toast';
+import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const { t, te } = useI18n();
 

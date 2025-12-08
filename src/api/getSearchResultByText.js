@@ -1,5 +1,5 @@
-import { request } from '@/util/request';
 import Config from '@/config';
+import { request } from '@/util/request';
 
 async function getSearchResultByText(searchText, searchTextMinLength = 2, opt = {}) {
   if (typeof searchText !== 'string' || searchText.length < searchTextMinLength) {
@@ -16,6 +16,10 @@ async function getSearchResultByText(searchText, searchTextMinLength = 2, opt = 
   };
 
   const data = await request(url, options);
+  if (data.status !== 'success') {
+    return false;
+  }
+
   return data;
 }
 

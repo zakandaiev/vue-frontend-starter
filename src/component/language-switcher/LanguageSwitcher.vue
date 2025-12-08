@@ -1,6 +1,6 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
 import Translation from '@/i18n/translation';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();

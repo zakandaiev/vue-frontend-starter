@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory, RouterView } from 'vue-router';
 import Translation from '@/i18n/translation';
+import hadleTelegramStartAppRouting from '@/router/telegram-startapp';
+import { createRouter, createWebHistory, RouterView } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,10 @@ router.onError(() => {
   if (import.meta.env.PROD) {
     window.location.href = '/';
   }
+});
+
+router.isReady().then(() => {
+  hadleTelegramStartAppRouting(router);
 });
 
 export default router;

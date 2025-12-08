@@ -1,9 +1,9 @@
-import { computed, ref } from 'vue';
-import { defineStore } from 'pinia';
 import { getSearchResultByText } from '@/api';
+import Config from '@/config';
 import Translation from '@/i18n/translation';
 import debounce from '@/util/debounce';
-import Config from '@/config';
+import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
 // USE CASE
 // import { useSearchStore } from '@/store';

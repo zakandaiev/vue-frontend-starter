@@ -1,9 +1,9 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import Config from '@/config';
 import LanguageSwitcher from '@/component/language-switcher/LanguageSwitcher.vue';
-import { IconMoon, IconSun, IconBrandGithub } from '@tabler/icons-vue';
+import Config from '@/config';
+import { IconBrandGithub, IconMoon, IconSun } from '@tabler/icons-vue';
+import { onMounted, useTemplateRef } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 /* eslint-disable no-undef */
 const appNameFormatted = APP_NAME_FORMATTED;
@@ -11,7 +11,7 @@ const appRepository = APP_REPOSITORY;
 
 const { t, tm, rt } = useI18n();
 
-const header = ref(null);
+const header = useTemplateRef('header');
 
 onMounted(() => {
   setHeader();

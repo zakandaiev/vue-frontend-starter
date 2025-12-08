@@ -1,6 +1,6 @@
-import { nextTick } from 'vue';
 import i18n from '@/i18n';
-import { setStorage, getStorage } from '@/util/storage';
+import { getStorage, setStorage } from '@/util/storage';
+import { nextTick } from 'vue';
 
 const Translation = {
   storageKey: 'user-language',
