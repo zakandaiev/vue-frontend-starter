@@ -44,14 +44,13 @@ const useSearchStore = defineStore('searchStore', () => {
         return false;
       }
 
-      const data = await getSearchResultByText(searchText.value, SEARCH_TEXT_MIN_LENGTH);
-      if (data.status !== 'success') {
+      const data = await getSearchResultByText({ keyword: searchText.value });
+      if (!data) {
         isLoading.value = false;
         return false;
       }
 
-      resultHistory.value[resultKey.value] = data.data || [];
-
+      resultHistory.value[resultKey.value] = data;
       isLoading.value = false;
 
       return result.value;

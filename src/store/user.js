@@ -42,7 +42,7 @@ const useUserStore = defineStore('userStore', () => {
       const dummyData = await getDummydata({
         dummyId: dataSession.value.dummyId,
       });
-      dataSession.value.dummy = dummyData.status === 'success' ? dummyData.data : null;
+      dataSession.value.dummy = dummyData || null;
     }
 
     return true;
