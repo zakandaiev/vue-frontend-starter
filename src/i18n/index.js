@@ -13,10 +13,12 @@ const i18n = createI18n({
   globalInjection: true,
   legacy: false,
   runtimeOnly: false,
-  pluralRules,
-  numberFormats,
-  datetimeFormats,
+  fallbackWarn: false,
+  missingWarn: false,
   messages,
+  datetimeFormats,
+  numberFormats,
+  pluralRules,
 });
 
 export default i18n;

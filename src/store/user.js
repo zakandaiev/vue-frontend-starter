@@ -1,5 +1,3 @@
-import { dummy as getDummydata } from '@/api';
-import route from '@/util/route';
 import { getStorage, setStorage } from '@/util/storage';
 import { defineStore } from 'pinia';
 import { computed, ref, watch } from 'vue';
@@ -14,8 +12,6 @@ const useUserStore = defineStore('userStore', () => {
     ...dataSession.value,
     ...dataStorage.value,
   }));
-
-  const isAuthenticated = computed(() => (data.value.pharmacyId && data.value.kassaId ? true : false));
 
   watch(
     () => dataSession.value,
@@ -33,18 +29,26 @@ const useUserStore = defineStore('userStore', () => {
     { deep: true },
   );
 
-  async function init() {
+  function init() {
     dataSession.value = getStorage(storageKey, 'session') || {};
     dataStorage.value = getStorage(storageKey, 'local') || {};
 
-    dataSession.value.dummyId = route.query.dummyId || dataSession.value.dummyId || null;
-    if (dataSession.value.dummyId) {
-      const dummyData = await getDummydata({
-        dummyId: dataSession.value.dummyId,
-      });
-      dataSession.value.dummy = dummyData || null;
-    }
+    return true;
+  }
 
+  function flushSession() {
+    dataSession.value = {};
+    return true;
+  }
+
+  function flushStorage() {
+    dataStorage.value = {};
+    return true;
+  }
+
+  function flush() {
+    flushSession();
+    flushStorage();
     return true;
   }
 
@@ -52,8 +56,10 @@ const useUserStore = defineStore('userStore', () => {
     dataSession,
     dataStorage,
     data,
-    isAuthenticated,
     init,
+    flushSession,
+    flushStorage,
+    flush,
   };
 });
 

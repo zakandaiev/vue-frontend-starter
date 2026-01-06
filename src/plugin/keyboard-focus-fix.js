@@ -1,119 +1,24 @@
 const KeyboardFocusFix = {
+  paddingMap: new WeakMap(),
+  stickyElements: new Set(),
+
   install() {
-    const isIOS = /iphone|ipad/.test(navigator.userAgent.toLowerCase());
-    if (!isIOS) {
-      return false;
-    }
+    document.body.addEventListener('focus', KeyboardFocusFix.handleFocus, true);
+    document.body.addEventListener('blur', KeyboardFocusFix.handleBlur, true);
+  },
 
-    const paddingMap = new WeakMap();
-    const stickyElements = new Set();
+  isDeviceIos() {
+    return window.navigator?.userAgent
+      ? /iphone|ipad|macintosh/.test(window.navigator.userAgent.toLowerCase())
+      : false;
+  },
 
-    function disableStickyElements(parentNode) {
-      if (!parentNode) {
-        return false;
-      }
+  isNodeInputable(node) {
+    return ['INPUT', 'TEXTAREA', 'SELECT'].includes(node.tagName);
+  },
 
-      parentNode.querySelectorAll('*').forEach((el) => {
-        const style = getComputedStyle(el);
-        if (style.position !== 'sticky') {
-          return false;
-        }
-
-        el.originalPosition = el.style.position;
-        el.style.position = 'static';
-
-        stickyElements.add(el);
-      });
-    }
-
-    function restoreStickyElements() {
-      stickyElements.forEach((el) => {
-        el.style.position = el.originalPosition || '';
-        delete el.originalPosition;
-      });
-
-      stickyElements.clear();
-    }
-
-    document.body.addEventListener(
-      'focus',
-      (event) => {
-        const { target } = event;
-        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) {
-          return false;
-        }
-
-        const scrollContainer = KeyboardFocusFix.findScrollableParent(target);
-        const originalPadding = parseFloat(getComputedStyle(scrollContainer).paddingBottom) || 0;
-
-        disableStickyElements(scrollContainer);
-
-        // Wait for keyboard loaded
-        setTimeout(() => {
-          const rect = target.getBoundingClientRect();
-          const viewportHeight = window.visualViewport?.height || window.innerHeight;
-
-          // If input is visible do nothing
-          if (rect.top >= 0 && rect.bottom <= viewportHeight) {
-            return false;
-          }
-
-          if (!paddingMap.has(scrollContainer)) {
-            paddingMap.set(scrollContainer, originalPadding);
-            scrollContainer.style.paddingBottom = `${originalPadding + window.innerHeight * 0.5}px`;
-          }
-
-          target.scrollIntoView({
-            block: 'center',
-            behavior: 'smooth',
-          });
-        }, 1000);
-      },
-      true,
-    );
-
-    document.body.addEventListener(
-      'blur',
-      (event) => {
-        const { target } = event;
-        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) {
-          return false;
-        }
-
-        const scrollContainer = KeyboardFocusFix.findScrollableParent(target);
-        const originalPadding = paddingMap.get(scrollContainer);
-
-        restoreStickyElements();
-
-        if (originalPadding !== undefined) {
-          let isCleaned = false;
-
-          const cleanup = () => {
-            if (isCleaned) {
-              return false;
-            }
-
-            scrollContainer.style.paddingBottom = `${originalPadding}px`;
-            paddingMap.delete(scrollContainer);
-
-            document.removeEventListener('click', onClick, true);
-            document.removeEventListener('touchend', onClick, true);
-
-            isCleaned = true;
-          };
-
-          const onClick = () => {
-            requestAnimationFrame(cleanup);
-          };
-
-          document.addEventListener('click', onClick, true);
-          document.addEventListener('touchend', onClick, true);
-
-          setTimeout(cleanup, 1000);
-        }
-      },
-      true,
-    );
+  isNodeForcedToScroll(node) {
+    return node.hasAttribute('data-force-scroll-on-focus');
   },
 
   findScrollableParent(el) {
@@ -131,6 +36,117 @@ const KeyboardFocusFix = {
     }
 
     return document.body;
+  },
+
+  disableStickyElements(parentNode) {
+    if (!parentNode) {
+      return false;
+    }
+
+    parentNode.querySelectorAll('*').forEach((el) => {
+      const style = getComputedStyle(el);
+      if (style.position !== 'sticky') {
+        return false;
+      }
+
+      el.originalPosition = el.style.position;
+      el.style.position = 'static';
+
+      KeyboardFocusFix.stickyElements.add(el);
+    });
+  },
+
+  restoreStickyElements() {
+    KeyboardFocusFix.stickyElements.forEach((el) => {
+      el.style.position = el.originalPosition || '';
+      delete el.originalPosition;
+    });
+
+    KeyboardFocusFix.stickyElements.clear();
+  },
+
+  handleFocus(event) {
+    const { target } = event;
+
+    const isDeviceIos = KeyboardFocusFix.isDeviceIos();
+    const isNodeInputable = KeyboardFocusFix.isNodeInputable(target);
+    const isNodeForcedToScroll = KeyboardFocusFix.isNodeForcedToScroll(target);
+    if (!isNodeForcedToScroll && (!isDeviceIos || !isNodeInputable)) {
+      return false;
+    }
+
+    const scrollContainer = KeyboardFocusFix.findScrollableParent(target);
+    const originalPadding = parseFloat(getComputedStyle(scrollContainer).paddingBottom) || 0;
+
+    KeyboardFocusFix.disableStickyElements(scrollContainer);
+
+    // Wait for keyboard loaded
+    setTimeout(() => {
+      const rect = target.getBoundingClientRect();
+      const viewportHeight = window.visualViewport?.height || window.innerHeight;
+      const viewportHeightCenter = viewportHeight / 2;
+
+      const isNodePlacedAboveViewportCenter = rect.bottom <= viewportHeightCenter
+        ? true
+        : false;
+
+      if (isNodePlacedAboveViewportCenter && !isNodeForcedToScroll) {
+        return false;
+      }
+
+      if (!KeyboardFocusFix.paddingMap.has(scrollContainer)) {
+        KeyboardFocusFix.paddingMap.set(scrollContainer, originalPadding);
+        scrollContainer.style.paddingBottom = `${originalPadding + (isNodeForcedToScroll && isNodePlacedAboveViewportCenter ? viewportHeight : viewportHeightCenter)}px`;
+      }
+
+      target.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      });
+    }, 1000);
+  },
+
+  handleBlur(event) {
+    const { target } = event;
+
+    const isDeviceIos = KeyboardFocusFix.isDeviceIos();
+    const isNodeInputable = KeyboardFocusFix.isNodeInputable(target);
+    const isNodeForcedToScroll = KeyboardFocusFix.isNodeForcedToScroll(target);
+    if (!isNodeForcedToScroll && (!isDeviceIos || !isNodeInputable)) {
+      return false;
+    }
+
+    const scrollContainer = KeyboardFocusFix.findScrollableParent(target);
+    const originalPadding = KeyboardFocusFix.paddingMap.get(scrollContainer);
+
+    KeyboardFocusFix.restoreStickyElements();
+
+    if (originalPadding !== undefined) {
+      let isCleaned = false;
+
+      const cleanup = () => {
+        if (isCleaned) {
+          return false;
+        }
+
+        scrollContainer.style.paddingBottom = `${originalPadding}px`;
+        KeyboardFocusFix.paddingMap.delete(scrollContainer);
+
+        document.removeEventListener('click', onClick, true);
+        document.removeEventListener('touchend', onClick, true);
+
+        isCleaned = true;
+      };
+
+      const onClick = () => {
+        requestAnimationFrame(cleanup);
+      };
+
+      document.addEventListener('click', onClick, true);
+      document.addEventListener('touchend', onClick, true);
+
+      setTimeout(cleanup, 1000);
+    }
   },
 };
 

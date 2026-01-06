@@ -1,3 +1,4 @@
+import Config from '@/config';
 import i18n from '@/i18n';
 import { getStorage, setStorage } from '@/util/storage';
 import { nextTick } from 'vue';
@@ -27,7 +28,7 @@ const Translation = {
   },
 
   get supportedLocales() {
-    return Translation.i18n.availableLocales;
+    return Config.i18n.supported || Translation.i18n.availableLocales;
   },
 
   isLocaleSupported(locale) {

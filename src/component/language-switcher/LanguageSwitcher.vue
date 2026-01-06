@@ -21,7 +21,10 @@ async function switchLanguage(newLocale) {
 </script>
 
 <template>
-  <div class="language-switcher">
+  <div
+    v-if="Translation.supportedLocales.length > 1"
+    class="language-switcher"
+  >
     <button
       v-for="locale in Translation.supportedLocales"
       :key="locale"
