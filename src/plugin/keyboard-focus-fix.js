@@ -7,9 +7,9 @@ const KeyboardFocusFix = {
     document.body.addEventListener('blur', KeyboardFocusFix.handleBlur, true);
   },
 
-  isDeviceIos() {
+  isDeviceMobileIOS() {
     return window.navigator?.userAgent
-      ? /iphone|ipad|macintosh/.test(window.navigator.userAgent.toLowerCase())
+      ? /iphone|ipad/.test(window.navigator.userAgent.toLowerCase())
       : false;
   },
 
@@ -68,10 +68,10 @@ const KeyboardFocusFix = {
   handleFocus(event) {
     const { target } = event;
 
-    const isDeviceIos = KeyboardFocusFix.isDeviceIos();
+    const isDeviceMobileIOS = KeyboardFocusFix.isDeviceMobileIOS();
     const isNodeInputable = KeyboardFocusFix.isNodeInputable(target);
     const isNodeForcedToScroll = KeyboardFocusFix.isNodeForcedToScroll(target);
-    if (!isNodeForcedToScroll && (!isDeviceIos || !isNodeInputable)) {
+    if (!isNodeForcedToScroll && (!isDeviceMobileIOS || !isNodeInputable)) {
       return false;
     }
 
@@ -109,10 +109,10 @@ const KeyboardFocusFix = {
   handleBlur(event) {
     const { target } = event;
 
-    const isDeviceIos = KeyboardFocusFix.isDeviceIos();
+    const isDeviceMobileIOS = KeyboardFocusFix.isDeviceMobileIOS();
     const isNodeInputable = KeyboardFocusFix.isNodeInputable(target);
     const isNodeForcedToScroll = KeyboardFocusFix.isNodeForcedToScroll(target);
-    if (!isNodeForcedToScroll && (!isDeviceIos || !isNodeInputable)) {
+    if (!isNodeForcedToScroll && (!isDeviceMobileIOS || !isNodeInputable)) {
       return false;
     }
 
