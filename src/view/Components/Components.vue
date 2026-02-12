@@ -2,7 +2,7 @@
 import Footer from '@/component/footer/Footer.vue';
 import Header from '@/component/header/Header.vue';
 import Loader from '@/component/loader/Loader.vue';
-import updateSEO from '@/composable/seo';
+import { updateSEO } from '@/composable';
 import copyToClipboard from '@/util/clipboard';
 import { getSlug } from '@/util/cyr-to-lat';
 import { randomString } from '@/util/random';

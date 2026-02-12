@@ -1,0 +1,24 @@
+{
+  "en": {
+    "seo": {
+      "title": "Authentication"
+    },
+    "title": "Authentication",
+    "email_label": "E-mail",
+    "email_placeholder": "Enter e-mail",
+    "password_label": "Password",
+    "password_placeholder": "Enter password",
+    "submit": "Login"
+  },
+  "uk": {
+    "seo": {
+      "title": "Аутентифікація"
+    },
+    "title": "Аутентифікація",
+    "email_label": "E-mail",
+    "email_placeholder": "Введіть e-mail",
+    "password_label": "Пароль",
+    "password_placeholder": "Введіть пароль",
+    "submit": "Увійти"
+  }
+}

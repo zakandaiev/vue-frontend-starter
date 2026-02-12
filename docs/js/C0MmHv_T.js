@@ -1,1 +1,2 @@
 const t={locale:{en:{t:0,b:{t:2,i:[{t:3}],s:"English"}},uk:{t:0,b:{t:2,i:[{t:3}],s:"Ukrainian"}}},locale_short:{en:{t:0,b:{t:2,i:[{t:3}],s:"EN"}},uk:{t:0,b:{t:2,i:[{t:3}],s:"UK"}}}};export{t as default};
+//# sourceMappingURL=C0MmHv_T.js.map

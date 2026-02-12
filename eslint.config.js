@@ -22,7 +22,8 @@ export default [
       'src/i18n/index.js',
     ],
   },
-  ...compat.extends('airbnb-base', 'plugin:vue/recommended'),
+  ...compat.extends('airbnb-base'),
+  ...vue.configs['flat/recommended'],
   {
     plugins: {
       vue,
@@ -57,6 +58,7 @@ export default [
       'import/no-named-as-default-member': 0,
       'max-len': 0,
       'no-param-reassign': 0,
+      'no-prototype-builtins': 0,
       'no-unneeded-ternary': 0,
       'no-use-before-define': 0,
       'vue/multi-word-component-names': 0,

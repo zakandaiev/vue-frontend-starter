@@ -2,7 +2,7 @@
 import Footer from '@/component/footer/Footer.vue';
 import Header from '@/component/header/Header.vue';
 import Hero from '@/component/hero/Hero.vue';
-import updateSEO from '@/composable/seo';
+import { updateSEO } from '@/composable';
 import { useI18n } from 'vue-i18n';
 
 const {

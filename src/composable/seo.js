@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import onLanguageChange from '@/composable/on-language-change';
+import { onLanguageChange } from '@/composable';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
