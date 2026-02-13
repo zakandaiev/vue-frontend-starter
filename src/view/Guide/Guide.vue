@@ -212,7 +212,7 @@ class="cursor-pointer"
 <span
 class="cursor-pointer"
 @click="copyCmd"
-><span class="color-primary">npm</span> run dev <span class="color-info">--port=3000</span></span>
+><span class="color-primary">npm</span> run dev <span class="color-info">-- --port=3000</span></span>
 </pre>
               </div>
 
@@ -235,7 +235,7 @@ class="cursor-pointer"
 <span
 class="cursor-pointer"
 @click="copyCmd"
-><span class="color-primary">npm</span> run build <span class="color-info">--base=/subdomain --outDir=/dest</span></span>
+><span class="color-primary">npm</span> run build <span class="color-info">-- --base=/subdomain --outDir=/dest</span></span>
 
 <span class="color-muted"># Start server for build preview</span>
 <span
@@ -246,7 +246,7 @@ class="cursor-pointer"
 <span
 class="cursor-pointer"
 @click="copyCmd"
-><span class="color-primary">npm</span> run preview <span class="color-info">--port=3001</span></span>
+><span class="color-primary">npm</span> run preview <span class="color-info">-- --port=3001</span></span>
 </pre>
               </div>
 
