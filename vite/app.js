@@ -38,5 +38,5 @@ Object.keys(env).forEach((key) => {
 export {
   appData,
   packageData,
-  processArg
+  processArg,
 };

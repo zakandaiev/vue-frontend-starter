@@ -32,5 +32,5 @@ const build = {
 
 export {
   base,
-  build
+  build,
 };
