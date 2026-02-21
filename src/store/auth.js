@@ -29,7 +29,7 @@ const useAuthStore = defineStore('authStore', () => {
   }
 
   async function login(body = {}) {
-    const url = `${Config.api.backend}/auth/login`;
+    const url = `${Config.api.url}/auth/login`;
     const options = {
       method: 'POST',
       credentials: 'include',
@@ -50,7 +50,7 @@ const useAuthStore = defineStore('authStore', () => {
   }
 
   async function logout() {
-    const url = `${Config.api.backend}/auth/logout`;
+    const url = `${Config.api.url}/auth/logout`;
     const options = {
       method: 'POST',
       credentials: 'include',
@@ -102,7 +102,7 @@ const useAuthStore = defineStore('authStore', () => {
   }
 
   async function refresh() {
-    const url = `${Config.api.backend}/auth/refresh`;
+    const url = `${Config.api.url}/auth/refresh`;
     const options = {
       method: 'POST',
       credentials: 'include',

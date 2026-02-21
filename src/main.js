@@ -3,12 +3,12 @@ import { createApp } from 'vue';
 
 import App from '@/App.vue';
 import i18n from '@/i18n';
+// import Clarity from '@/plugin/clarity';
 import Translation from '@/i18n/translation';
 import KeyboardFocusFix from '@/plugin/keyboard-focus-fix';
-import router from '@/router';
-// import Clarity from '@/plugin/clarity';
 // import Logger from '@/plugin/logger';
 // import Telegram from '@/plugin/telegram';
+import router from '@/router';
 
 let isAppMounted = false;
 const mountApp = () => {
@@ -30,7 +30,7 @@ app.use(Translation);
 app.use(KeyboardFocusFix);
 
 // app.use(Clarity, {
-//   id: import.meta.env.APP_ENV_TEST,
+//   id: import.meta.env.APP_CLARITY_ID,
 //   enabled: import.meta.env.PROD,
 // });
 

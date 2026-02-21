@@ -2,7 +2,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import vue from 'eslint-plugin-vue';
 import globals from 'globals';
-import { absPath } from './vite/path.js';
+import { absPath } from './core/path.js';
 
 const compat = new FlatCompat({
   baseDirectory: absPath.root,
@@ -42,7 +42,12 @@ export default [
     settings: {
       'import/resolver': {
         alias: {
-          map: [['@', './src']],
+          map: [
+            ['@', './src'],
+            ['#root', './'],
+            ['#core', './core'],
+            ['#src', './src'],
+          ],
         },
       },
     },

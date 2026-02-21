@@ -2,18 +2,18 @@
 import Footer from '@/component/footer/Footer.vue';
 import Header from '@/component/header/Header.vue';
 import { updateSEO } from '@/composable';
+import Config from '@/config';
 import copyToClipboard from '@/util/clipboard';
-import { getSlug } from '@/util/cyr-to-lat';
 import { randomString } from '@/util/random';
 import smoothScroll from '@/util/smooth-scroll';
+import { slugify } from '@/util/text';
 import toast from '@/util/toast';
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-/* eslint-disable no-undef */
-const appName = APP_NAME;
-const appDescription = APP_DESCRIPTION;
-const appRepository = APP_REPOSITORY;
+const appName = Config.appMeta.name;
+const appDescription = Config.appMeta.description;
+const appRepository = Config.appMeta.repository;
 
 const { t, te } = useI18n();
 
@@ -29,7 +29,7 @@ onMounted(() => {
 
   navigationTitles.forEach((title) => {
     const link = document.createElement('a');
-    const linkId = `${getSlug(title.textContent)}-${randomString()}`;
+    const linkId = `${slugify(title.textContent)}-${randomString()}`;
 
     title.id = linkId;
 

@@ -1,8 +1,8 @@
+import { absPath } from '#core/path.js';
 import VueI18nPluginInstance from '@intlify/unplugin-vue-i18n/vite';
 import vueInstance from '@vitejs/plugin-vue';
 import { resolve } from 'node:path';
 import vueDevToolsInstance from 'vite-plugin-vue-devtools';
-import { absPath } from './path.js';
 
 const vueConfig = {};
 const vue = () => vueInstance(vueConfig);

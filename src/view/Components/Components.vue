@@ -4,9 +4,9 @@ import Header from '@/component/header/Header.vue';
 import Loader from '@/component/loader/Loader.vue';
 import { updateSEO } from '@/composable';
 import copyToClipboard from '@/util/clipboard';
-import { getSlug } from '@/util/cyr-to-lat';
 import { randomString } from '@/util/random';
 import smoothScroll from '@/util/smooth-scroll';
+import { slugify } from '@/util/text';
 import toast from '@/util/toast';
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -25,7 +25,7 @@ onMounted(() => {
 
   navigationTitles.forEach((title) => {
     const link = document.createElement('a');
-    const linkId = `${getSlug(title.textContent)}-${randomString()}`;
+    const linkId = `${slugify(title.textContent)}-${randomString()}`;
 
     title.id = linkId;
 

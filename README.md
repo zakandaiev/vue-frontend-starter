@@ -18,9 +18,6 @@ Vue FrontEnd Starter is a boilerplate kit for easy building modern web applicati
 * Live-server with hot-reload
 * HTML, CSS, JS, images auto minifier
 * Ready-to-use Javascript utils, HTML styled components, CSS helpers, SASS utils etc.
-* reseter.css
-* .htaccess, robots.txt, sitemap.xml, favicon
-* 404 page
 * And many more...
 
 ## How to use

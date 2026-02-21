@@ -1,9 +1,9 @@
 <script setup>
+import Config from '@/config';
 import { useI18n } from 'vue-i18n';
 
-/* eslint-disable no-undef */
-const appAuthor = APP_AUTHOR;
-const appAuthorUrl = APP_AUTHOR_URL;
+const appAuthor = Config.appMeta.author;
+const appAuthorUrl = Config.appMeta.authorUrl;
 
 const { t } = useI18n();
 </script>

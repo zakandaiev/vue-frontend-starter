@@ -4,6 +4,7 @@
   2. Uncomment import in @src/sass/vendor/_all.scss
 */
 
+import { isString } from '@/util/misc';
 import { vibrate } from '@/util/vibrate';
 import { ref, useTemplateRef } from 'vue';
 
@@ -12,7 +13,7 @@ function useAnimate(animationRefName = 'animateNode', animationPrefix = 'animate
   const isAnimating = ref(false);
 
   function animate(animationName, vibrateName) {
-    if (!nodeRef.value || isAnimating.value || typeof animationName !== 'string') {
+    if (!nodeRef.value || isAnimating.value || !isString(animationName)) {
       return false;
     }
 

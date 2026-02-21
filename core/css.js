@@ -1,7 +1,8 @@
+import { processArg } from '#core/app.js';
 import autoprefixer from 'autoprefixer';
-import { processArg } from './app.js';
 
 const css = {
+  devSourcemap: !processArg.build,
   postcss: {
     plugins: [
       autoprefixer({

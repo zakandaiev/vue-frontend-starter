@@ -1,9 +1,9 @@
 <script setup>
+import Config from '@/config';
 import { useI18n } from 'vue-i18n';
 
-/* eslint-disable no-undef */
-const appNameFormatted = APP_NAME_FORMATTED;
-const appRepository = APP_REPOSITORY;
+const appNameFormatted = Config.appMeta.nameFormatted;
+const appRepository = Config.appMeta.repository;
 
 const { t } = useI18n();
 </script>

@@ -1,5 +1,6 @@
 import Translation from '@/i18n/translation';
 import { useAuthStore } from '@/store';
+import { isFunction } from '@/util/misc';
 import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -45,13 +46,13 @@ function useAuthMiddleware(options = {}) {
       return true;
     }
 
-    if (typeof preReadyCallback === 'function') {
+    if (isFunction(preReadyCallback)) {
       await preReadyCallback();
     }
 
     isReady.value = true;
 
-    if (typeof postReadyCallback === 'function') {
+    if (isFunction(postReadyCallback)) {
       await postReadyCallback();
     }
 

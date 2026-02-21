@@ -4,6 +4,7 @@
   2. Uncomment import and app.use in @src/main.js
 */
 
+import { isString } from '@/util/misc';
 import route from '@/util/route';
 import ClarityInstance from '@microsoft/clarity';
 
@@ -49,7 +50,7 @@ const Clarity = {
     }
 
     const clarityTags = route.query['clarity-tags'];
-    if (!clarityTags || typeof clarityTags !== 'string' || !clarityTags.length) {
+    if (!clarityTags || !isString(clarityTags) || !clarityTags.length) {
       return true;
     }
 
@@ -64,7 +65,7 @@ const Clarity = {
         return false;
       }
 
-      if (typeof value === 'string' && value.length) {
+      if (isString(value) && value.length) {
         tagsData[key] = value;
       } else {
         tagsData[key] = true;

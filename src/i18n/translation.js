@@ -81,15 +81,15 @@ const Translation = {
     };
   },
 
-  async routeMiddleware(to, _from, next) {
+  async routeMiddleware(to) {
     const paramLocale = to.params.locale;
 
     if (!Translation.isLocaleSupported(paramLocale)) {
       if (to.name === 'home' && to.path !== '/') {
-        return next(Translation.getUserLocale() + to.path);
+        return Translation.getUserLocale() + to.path;
       }
 
-      return next(Translation.i18nRoute({
+      return Translation.i18nRoute({
         name: to.name,
         params: {
           ...to.params,
@@ -98,12 +98,12 @@ const Translation = {
         query: {
           ...to.query,
         },
-      }));
+      });
     }
 
     await Translation.switchLocale(paramLocale);
 
-    return next();
+    return true;
   },
 };
 

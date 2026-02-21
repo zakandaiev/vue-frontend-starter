@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/store';
+import { isFunction } from '@/util/misc';
 import { watch } from 'vue';
 
 function onAuthChange(callback) {
@@ -7,7 +8,7 @@ function onAuthChange(callback) {
   watch(
     () => authStore.isAuthenticated,
     (newValue, oldValue) => {
-      if (typeof callback === 'function') {
+      if (isFunction(callback)) {
         callback(newValue, oldValue);
       }
     },

@@ -1,5 +1,6 @@
-/* eslint-disable no-undef */
 import { onLanguageChange } from '@/composable';
+import Config from '@/config';
+import { isString } from '@/util/misc';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -35,13 +36,17 @@ function updateSEOTitle(options = {}) {
 
   const { title: routeMetaTitle } = route.meta;
 
-  const appName = te('app.name') ? t('app.name') : APP_NAME_FORMATTED;
+  const appName = te('app.name') ? t('app.name') : Config.appMeta.nameFormatted;
 
   // DEFINE PREFIX
-  let titlePrefix = typeof options.titlePrefix === 'string' ? options.titlePrefix : '';
+  let titlePrefix = isString(options.titlePrefix)
+    ? options.titlePrefix
+    : '';
 
   // DEFINE SUFFIX
-  let titleSuffix = typeof options.titleSuffix === 'string' ? options.titleSuffix : ` — ${appName}`;
+  let titleSuffix = isString(options.titleSuffix)
+    ? options.titleSuffix
+    : ` — ${appName}`;
 
   // DEFINE TITLE
   let title = appName;
@@ -75,7 +80,7 @@ function updateSEODescription(options = {}) {
   const { description: routeMetaDescription } = route.meta;
 
   // DEFINE
-  let description = APP_DESCRIPTION;
+  let { description } = Config.appMeta;
   if (options.description) {
     description = options.description;
   } else if (te(options.i18nDescriptionKey)) {
@@ -106,7 +111,7 @@ function updateSEOKeywords(options = {}) {
   const { keywords: routeMetaKeywords } = route.meta;
 
   // DEFINE
-  let keywords = APP_KEYWORDS;
+  let { keywords } = Config.appMeta;
   if (options.keywords) {
     keywords = options.keywords;
   } else if (te(options.i18nKeywordsKey)) {

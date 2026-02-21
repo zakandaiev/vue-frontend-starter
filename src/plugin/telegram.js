@@ -1,3 +1,5 @@
+import { isFunction, isString } from '@/util/misc';
+
 const Telegram = {
   startParam: {},
   isInstalled: false,
@@ -15,9 +17,9 @@ const Telegram = {
     script.src = 'https://telegram.org/js/telegram-web-app.js';
     script.onload = () => {
       const webApp = window?.Telegram?.WebApp;
-      const isPlatformSupported = typeof webApp.platform === 'string' && webApp.platform.length && webApp.platform !== 'unknown';
+      const isPlatformSupported = isString(webApp.platform) && webApp.platform.length && webApp.platform !== 'unknown';
 
-      const optOnLoad = typeof options.onLoad === 'function' ? options.onLoad : false;
+      const optOnLoad = isFunction(options.onLoad) ? options.onLoad : false;
       if (optOnLoad) {
         optOnLoad(isPlatformSupported, webApp);
       }
@@ -35,7 +37,7 @@ const Telegram = {
         Telegram.setRouterHistoryToBackButton(optRouter);
       }
 
-      const optOnReady = typeof options.onReady === 'function' ? options.onReady : false;
+      const optOnReady = isFunction(options.onReady) ? options.onReady : false;
       if (optOnReady) {
         optOnReady(webApp);
       }
@@ -64,7 +66,7 @@ const Telegram = {
   parseStartParam: (startParamString) => {
     const result = {};
 
-    if (typeof startParamString !== 'string' || !startParamString.length) {
+    if (!isString(startParamString) || !startParamString.length) {
       return result;
     }
 
@@ -77,7 +79,7 @@ const Telegram = {
         return false;
       }
 
-      if (typeof value === 'string' && value.length) {
+      if (isString(value) && value.length) {
         result[key] = value;
       } else {
         result[key] = true;

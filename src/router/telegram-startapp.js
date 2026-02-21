@@ -1,8 +1,9 @@
 import Translation from '@/i18n/translation';
 import Telegram from '@/plugin/telegram';
+import { isObject, isString } from '@/util/misc';
 
 function hadleTelegramStartAppRouting(router) {
-  if (!Telegram.isReady || typeof Telegram.startParam !== 'object') {
+  if (!Telegram.isReady || !isObject(Telegram.startParam)) {
     return false;
   }
 
@@ -14,7 +15,7 @@ function hadleTelegramStartAppRouting(router) {
   });
 
   const { route } = Telegram.startParam;
-  if (typeof route !== 'string') {
+  if (!isString(route)) {
     return hadleUtm(router, utmData);
   }
 
@@ -96,7 +97,7 @@ function hadleComponentsRoute(router, componentId = null, utmData = {}) {
 }
 
 function hadleUtm(router, utmData) {
-  if (!router || typeof utmData !== 'object') {
+  if (!router || !isObject(utmData)) {
     return false;
   }
 
