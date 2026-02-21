@@ -58,5 +58,5 @@ app.use(KeyboardFocusFix);
 
 mountApp();
 
-// eslint-disable-next-line
+// eslint-disable-next-line no-console
 console.log('%cMade by Zakandaiev', 'background:#41b883;color:#fff;padding:10px;font-weight:bold;');
